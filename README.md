@@ -5,6 +5,7 @@ Demo application that includes:
 
 ## Description
 This application is showing how to use Restful API with help of Resource Controllers provided by Laravel Framework. There are three models used:
+
 1. User
 2. Author
 3. Quote
