@@ -32,6 +32,8 @@ Provided seeder by default generates:
 * 50 authors
 * 400 quotes
 
+Laracasts' TestDummy library is used to generate random data. Its factories are placed in `tests/factories/factories.php` ([more info](https://github.com/laracasts/TestDummy#step-2-create-a-factories-file)). `database/seeds/DatabaseSeeder.php` is a file in which you can change number of created data. 
+
 ## Test User
 Together with randomly generated data comes the test user. To log in with this user use credentials:  
 `E-Mail: test@test.com`  
