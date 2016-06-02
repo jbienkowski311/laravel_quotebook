@@ -14,6 +14,8 @@ The relationships are as follows:
 * Author <=> Quotes - One to Many
 * User <=> Quotes - Many to Many
 
+User can register and login. After successful authentication user can like generated quotes.
+
 ## Installation
 1. `git clone git@github.com:jbienkowski311/laravel_quotebook.git` or download and unpack repository
 2. Copy `.env.example` to `.env` and set it up:
