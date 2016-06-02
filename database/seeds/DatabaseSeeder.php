@@ -15,13 +15,19 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // create users
-        TestDummy::times(50)->create('App\User');
+        TestDummy::times(24)->create('App\User');
+        TestDummy::create('App\User', [
+            'email' => 'test@test.com',
+            'name' => 'Test User',
+            'password' => Hash::make('password'),
+            'api_token' => str_random(60)
+        ]);
 
         // create authors
-        TestDummy::times(10)->create('App\Author');
+        TestDummy::times(50)->create('App\Author');
 
         // create quote and relate it to some author
-        for($i=0; $i<100; $i++) {
+        for($i=0; $i<400; $i++){
             $author_id = App\Author::find($i%10+1)->id;
             TestDummy::create('App\Quote', ['author_id' => $author_id]);
         }
