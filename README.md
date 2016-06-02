@@ -20,11 +20,12 @@ The relationships are as follows:
   * Set up database connection
   * Change `CACHE_DRIVER` to `array`
 3. Run `composer update`
-4. Run `php artisan migrate`
-5. Run `php artisan db:seed`
-6. Run `php artisan serve`
-7. Visit http://localhost:8000
-8. Enjoy!
+4. Run `php artisan key:generate`
+5. Run `php artisan migrate`
+6. Run `php artisan db:seed`
+7. Run `php artisan serve`
+8. Visit http://localhost:8000
+9. Enjoy!
 
 ## Seeding Data
 Provided seeder by default generates:
