@@ -42,5 +42,5 @@ Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api', 'namespace' => '
     Route::resource('authors', 'AuthorsController', ['except' => ['create', 'edit']]); // Api\AuthorsController
     Route::resource('quotes', 'QuotesController', ['except' => ['create', 'edit']]); // Api\QuotesController
     Route::resource('authors.quotes', 'AuthorsQuotesController', ['except' => ['create', 'edit']]); // Api\AuthorsQuotesController
-    Route::resource('users.quotes', 'UsersQuotesController', ['except' => ['create', 'edit']]); // Api\UsersQuotesController
+    Route::resource('users.quotes', 'UsersQuotesController', ['only' => ['index', 'show', 'destroy']]); // Api\UsersQuotesController
 });

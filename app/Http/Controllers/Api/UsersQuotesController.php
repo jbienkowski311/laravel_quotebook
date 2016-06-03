@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 
+use App\User;
+use App\Quote;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -14,30 +16,23 @@ class UsersQuotesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($user_id)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $user = User::find($user_id);
+        if(!$user){
+            return response()->json([
+                'status' => 404,
+                'message' => 'User not found'
+            ], 404);
+        }
+        $quotes = $user->quotes;
+        return response()->json([
+            'status' => 200,
+            'metadata' => [
+                'count' => count($quotes)
+            ],
+            'data' => $quotes
+        ]);
     }
 
     /**
@@ -46,32 +41,26 @@ class UsersQuotesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($user_id, $quote_id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+        $user = User::find($user_id);
+        if(!$user){
+            return response()->json([
+                'status' => 404,
+                'message' => 'Author not found'
+            ], 404);
+        }
+        $quote = $user->quotes()->where('id', $quote_id)->first();
+        if(!$quote){
+            return response()->json([
+                'status' => 404,
+                'message' => 'Quote not found'
+            ], 404);
+        }
+        return response()->json([
+            'status' => 200,
+            'data' => $quote
+        ]);
     }
 
     /**
@@ -80,8 +69,26 @@ class UsersQuotesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($user_id, $quote_id)
     {
-        //
+        $user = User::find($user_id);
+        if(!$user){
+            return response()->json([
+                'status' => 404,
+                'message' => 'User not found'
+            ], 404);
+        }
+        $quote = $user->quotes();
+        if(!$quote->where('id', $quote_id)->first()){
+            return response()->json([
+                'status' => 404,
+                'message' => 'Quote not found'
+            ], 404);
+        }
+        $quote->detach($quote_id);
+        return response()->json([
+        'status' => 200,
+        'message' => 'User like deleted'
+    ]);
     }
 }
